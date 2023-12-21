@@ -17,9 +17,7 @@ hold_nav_pos = {120, 10, 60, 60}
 hold_hdg_pos = {175, 10, 60, 60}
 
 trim_pitch_pos = {230, 65, 60, 60}
-trim_roll_pos = {285, 65, 60, 60}
-wheel_pitch_pos = {230, 10, 60, 60}
-wheel_roll_pos = {285, 10, 60, 60}
+trim_roll_pos = {230, 10, 60, 60}
 
 mode_nav_pos = {270, 10, 60, 195}
 
@@ -42,12 +40,8 @@ ap_components = {ap {
     position = hold_hdg_pos
 }, trim_pitch {
     position = trim_pitch_pos
-}, wheel_pitch {
-    position = wheel_pitch_pos
 }, trim_roll {
     position = trim_roll_pos
-}, wheel_roll {
-    position = wheel_roll_pos
 } -- mode_nav {
 ---    position = mode_nav_pos
 -- }

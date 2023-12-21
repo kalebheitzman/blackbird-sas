@@ -44,13 +44,3 @@ heading_status = globalProperty("sim/cockpit2/autopilot/heading_status")
 heading_is_gpss = globalProperty("sim/cockpit2/autopilot/heading_is_gpss")
 hnav_armed = globalProperty("sim/cockpit2/autopilot/hnav_armed")
 sync_hold_roll_deg = globalProperty("sim/cockpit2/autopilot/sync_hold_roll_deg")
-
--- hover colors
-hover_pitch_up_color = createProperty("sr71sas/hover_pitch_up_color")
-hover_pitch_down_color = createProperty("sr71sas/hover_pitch_down_color")
-hover_roll_left_color = createProperty("sr71sas/hover_roll_left_color")
-hover_roll_right_color = createProperty("sr71sas/hover_roll_right_color")
-set(hover_pitch_up_color, white)
-set(hover_pitch_down_color, white)
-set(hover_roll_left_color, white)
-set(hover_roll_right_color, white)

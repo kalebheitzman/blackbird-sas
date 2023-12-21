@@ -196,109 +196,7 @@ function onMouseDown(component, x, y, button, parentX, parentY)
     return false
 end
 
-function onMouseHold(component, x, y, button, parentX, parentY)
-
-    pitch_tune = 1 / 60
-    roll_tune = 1 / 20
-
-    -- wheel_pitch up button
-    if (button == MB_LEFT) and x >= wheel_pitch_pos[1] and x <= (wheel_pitch_pos[1] + 50) and y >=
-        (wheel_pitch_pos[2] + 27.5) and y <= (wheel_pitch_pos[2] + 50) then
-
-        sync_hold_pitch_deg_ref = get(sync_hold_pitch_deg)
-        pitch_min = -2.5
-        pitch_adj = sync_hold_pitch_deg_ref - pitch_tune
-        if pitch_adj < pitch_min then
-            pitch_adj = pitch_min
-        end
-
-        set(sync_hold_pitch_deg, pitch_adj)
-        set(hover_pitch_down_color, green)
-    end
-
-    -- wheel_pitch down button
-    if (button == MB_LEFT) and x >= wheel_pitch_pos[1] and x <= (wheel_pitch_pos[1] + 50) and y >= (wheel_pitch_pos[2]) and
-        y <= (wheel_pitch_pos[2] + 22.5) then
-
-        sync_hold_pitch_deg_ref = get(sync_hold_pitch_deg)
-        pitch_max = 6.55
-        pitch_adj = sync_hold_pitch_deg_ref + pitch_tune
-        if (pitch_adj > pitch_max) then
-            pitch_adj = pitch_max
-        end
-
-        set(sync_hold_pitch_deg, pitch_adj)
-        set(hover_pitch_up_color, green)
-    end
-
-    -- wheel_roll button
-    if (button == MB_LEFT) and x >= wheel_roll_pos[1] and x <= (wheel_roll_pos[1] + 22.5) and y >= wheel_roll_pos[2] and
-        y <= (wheel_roll_pos[2] + 50) then
-
-        sync_hold_roll_deg_ref = get(sync_hold_roll_deg)
-        roll_min = -30 -- 50 in HDG mode, 45 in ANS mode
-        roll_adj = sync_hold_roll_deg_ref - roll_tune
-        if roll_adj < roll_min then
-            roll_adj = roll_min
-        end
-        set(sync_hold_roll_deg, roll_adj)
-        set(hover_roll_left_color, green)
-    end
-
-    -- wheel_roll button
-    if (button == MB_LEFT) and x >= (wheel_roll_pos[1] + 27.5) and x <= (wheel_roll_pos[1] + 50) and y >=
-        wheel_roll_pos[2] and y <= (wheel_roll_pos[2] + 50) then
-
-        sync_hold_roll_deg_ref = get(sync_hold_roll_deg)
-        roll_max = 30 -- 50 in HDG mode, 45 in ANS mode
-        roll_adj = sync_hold_roll_deg_ref + roll_tune
-        if roll_adj > roll_max then
-            roll_adj = roll_max
-        end
-        set(sync_hold_roll_deg, roll_adj)
-        set(hover_roll_right_color, green)
-    end
-
-end
-
-function onMouseUp(component, x, y, button, parentX, parentY)
-
-    -- wheel_pitch up button
-    if (button == MB_LEFT) and x >= wheel_pitch_pos[1] and x <= (wheel_pitch_pos[1] + 50) and y >=
-        (wheel_pitch_pos[2] + 27.5) and y <= (wheel_pitch_pos[2] + 50) then
-
-        set(hover_pitch_down_color, white)
-    end
-
-    -- wheel_pitch down button
-    if (button == MB_LEFT) and x >= wheel_pitch_pos[1] and x <= (wheel_pitch_pos[1] + 50) and y >= (wheel_pitch_pos[2]) and
-        y <= (wheel_pitch_pos[2] + 22.5) then
-
-        set(hover_pitch_up_color, white)
-    end
-
-    -- wheel_roll button
-    if (button == MB_LEFT) and x >= wheel_roll_pos[1] and x <= (wheel_roll_pos[1] + 22.5) and y >= wheel_roll_pos[2] and
-        y <= (wheel_roll_pos[2] + 50) then
-
-        set(hover_roll_left_color, white)
-    end
-
-    -- wheel_roll button
-    if (button == MB_LEFT) and x >= (wheel_roll_pos[1] + 27.5) and x <= (wheel_roll_pos[1] + 50) and y >=
-        wheel_roll_pos[2] and y <= (wheel_roll_pos[2] + 50) then
-
-        set(hover_roll_right_color, white)
-    end
-
-end
-
 function onMouseWheel(component, x, y, button, parentX, parentY, value)
-
-    set(hover_pitch_down_color, white)
-    set(hover_pitch_up_color, white)
-    set(hover_roll_left_color, white)
-    set(hover_roll_right_color, white)
 
     -- hold_mach button
     if x >= hold_mach_pos[1] and x <= (hold_mach_pos[1] + 50) and y >= (hold_mach_pos[2]) and y <=
@@ -332,13 +230,11 @@ function onMouseWheel(component, x, y, button, parentX, parentY, value)
 
         airspeed_is_mach_ref = get(airspeed_is_mach)
         airspeed_kts_const_ref = get(airspeed_kts_const)
-        airspeed_kts_tune = 1 / 100
+        airspeed_kts_tune = 1 / 2
         airspeed_kts_adj = airspeed_kts_const_ref + (airspeed_kts_tune * value)
 
-        kts_min = 2.6
-        kts_max = 3.3
-
-        sasl.logInfo(airspeed_kts_adj)
+        kts_min = 310
+        kts_max = 500
 
         if airspeed_kts_adj < kts_min then
             airspeed_kts_adj = kts_min
@@ -355,6 +251,9 @@ function onMouseWheel(component, x, y, button, parentX, parentY, value)
     -- wheel_pitch up button
     if x >= trim_pitch_pos[1] and x <= (trim_pitch_pos[1] + 50) and y >= (trim_pitch_pos[2]) and y <=
         (trim_pitch_pos[2] + 50) then
+
+        altitude_mode_ref = get(altitude_mode)
+
         sync_hold_pitch_deg_ref = get(sync_hold_pitch_deg)
         pitch_tune = 1 / 60
         pitch_min = -2.5
@@ -363,38 +262,27 @@ function onMouseWheel(component, x, y, button, parentX, parentY, value)
             pitch_adj = pitch_min
         end
 
-        set(sync_hold_pitch_deg, pitch_adj)
-        if value > 0 then
-            set(hover_pitch_down_color, green)
-        else
-            set(hover_pitch_up_color, green)
+        if altitude_mode_ref == 3 then
+            set(sync_hold_pitch_deg, pitch_adj)
         end
     end
 
     -- wheel_roll button
     if x >= trim_roll_pos[1] and x <= (trim_roll_pos[1] + 50) and y >= trim_roll_pos[2] and y <= (trim_roll_pos[2] + 50) then
 
+        heading_mode_ref = get(heading_mode)
+
         sync_hold_roll_deg_ref = get(sync_hold_roll_deg)
-        roll_tune = 1 / 20
+        roll_tune = 1 / 15
         roll_min = -30 -- 50 in HDG mode, 45 in ANS mode
         roll_adj = sync_hold_roll_deg_ref + (roll_tune * value)
         if roll_adj < roll_min then
             roll_adj = roll_min
         end
-        set(sync_hold_roll_deg, roll_adj)
-        if value > 0 then
-            set(hover_roll_right_color, green)
-        else
-            set(hover_roll_left_color, green)
+
+        if heading_mode_ref == 0 then
+            set(sync_hold_roll_deg, roll_adj)
         end
     end
-
-end
-
-function onMouseMove()
-    set(hover_pitch_down_color, white)
-    set(hover_pitch_up_color, white)
-    set(hover_roll_left_color, white)
-    set(hover_roll_right_color, white)
 
 end
