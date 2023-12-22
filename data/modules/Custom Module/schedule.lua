@@ -34,7 +34,7 @@ function airspeed_schedule()
         bleed_table[450] = 2.6
         bleed_table[460] = 2.5
         bleed_table[470] = 2.4
-        bleed_table[480] = 1.3
+        bleed_table[480] = 2.3
         bleed_table[490] = 2.2
         bleed_table[500] = 2.1
 
@@ -48,11 +48,15 @@ function airspeed_schedule()
         bleed_mach = bleed_table[schedule_kts]
 
         -- turn the schedule on when needed
-        if mach_ref > bleed_mach and schedule_on_ref == 0 then
+        if mach_ref > bleed_mach and airspeed_kts_ref > schedule_kts and schedule_on_ref == 0 then
             set(schedule_on, 1)
         end
 
-        -- sasl.logInfo("schedule", schedule_on_ref, schedule_kts)
+        mach_diff = mach_ref - bleed_mach
+        kts_diff = airspeed_kts_ref - (mach_diff * 10)
+
+        -- sasl.logInfo("schedule", schedule_on_ref, schedule_kts, kts_diff, airspeed_kts_ref, bleed_mach, mach_ref,
+        --     mach_diff)
 
         -- schedule is on, update the KEAS/MACH hold
         if schedule_on_ref == 1 then
@@ -61,9 +65,15 @@ function airspeed_schedule()
             elseif schedule_kts <= kts_min then
                 schedule_speed = kts_min
             else
-                schedule_speed = schedule_kts
+                schedule_speed = kts_diff
             end
             set(airspeed_dial_kts, schedule_speed)
+            -- if airspeed_is_mach_ref == 1 then
+            --     set(airspeed_dial_kts_mach, airspeed_mach_const_ref)
+            -- else
+            --     set(airspeed_dial_kts, schedule_speed)
+            -- end
+
         else
             if airspeed_is_mach_ref == 1 then
                 set(airspeed_dial_kts_mach, airspeed_mach_const_ref)

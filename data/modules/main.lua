@@ -8,7 +8,7 @@ sasl.options.setInteractivity(true)
 
 local apWindow = contextWindow {
     name = "SR71 Autopilot",
-    position = {10, 10, 360, 220},
+    position = {10, 10, 355, 125},
     noResize = true,
     visible = true,
     vrAuto = true,
@@ -16,7 +16,7 @@ local apWindow = contextWindow {
     noMove = true,
     noBackground = true,
     components = {autopilot {
-        position = {0, 0, 512, 512}
+        position = {0, 0, 355, 125}
     }}
 }
 

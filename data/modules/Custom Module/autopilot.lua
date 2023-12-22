@@ -6,20 +6,20 @@ include("./interaction.lua")
 include("./schedule.lua")
 
 -- positions
-ap_pos = {10, 65, 60, 60}
-stab_pitch_pos = {65, 65, 60, 60}
-stab_roll_pos = {120, 65, 60, 60}
-stab_yaw_pos = {175, 65, 60, 60}
+ap_pos = {10, 65, 50, 50}
+stab_pitch_pos = {65, 65, 50, 50}
+stab_roll_pos = {120, 65, 50, 50}
+stab_yaw_pos = {175, 65, 50, 50}
 
-hold_mach_pos = {10, 10, 60, 60}
-hold_keas_pos = {65, 10, 60, 60}
-hold_nav_pos = {120, 10, 60, 60}
-hold_hdg_pos = {175, 10, 60, 60}
+hold_mach_pos = {10, 10, 50, 50}
+hold_keas_pos = {65, 10, 50, 50}
+hold_nav_pos = {120, 10, 50, 50}
+hold_hdg_pos = {175, 10, 50, 50}
 
-trim_pitch_pos = {230, 65, 60, 60}
-trim_roll_pos = {230, 10, 60, 60}
+trim_pitch_pos = {230, 65, 50, 50}
+trim_roll_pos = {230, 10, 50, 50}
 
-mode_nav_pos = {270, 10, 60, 195}
+mode_nav_pos = {285, 10, 60, 195}
 
 -- autopilot components
 ap_components = {ap {
@@ -42,10 +42,9 @@ ap_components = {ap {
     position = trim_pitch_pos
 }, trim_roll {
     position = trim_roll_pos
-} -- mode_nav {
----    position = mode_nav_pos
--- }
-}
+}, mode_nav {
+    position = mode_nav_pos
+}}
 
 function draw()
     drawAll(ap_components)

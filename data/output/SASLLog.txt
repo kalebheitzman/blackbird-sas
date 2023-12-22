@@ -27,12 +27,16 @@
 [SR71AUTOPILOT INFO]: [LUA]: including	./functions.lua
 [SR71AUTOPILOT INFO]: [LUA]: loading	hold_nav
 [SR71AUTOPILOT INFO]: [LUA]: including	./styles.lua
+[SR71AUTOPILOT INFO]: [LUA]: including	./functions.lua
 [SR71AUTOPILOT INFO]: [LUA]: loading	hold_hdg
 [SR71AUTOPILOT INFO]: [LUA]: including	./styles.lua
+[SR71AUTOPILOT INFO]: [LUA]: including	./functions.lua
 [SR71AUTOPILOT INFO]: [LUA]: loading	trim_pitch
 [SR71AUTOPILOT INFO]: [LUA]: including	./styles.lua
 [SR71AUTOPILOT INFO]: [LUA]: including	./functions.lua
 [SR71AUTOPILOT INFO]: [LUA]: loading	trim_roll
 [SR71AUTOPILOT INFO]: [LUA]: including	./styles.lua
 [SR71AUTOPILOT INFO]: [LUA]: including	./functions.lua
+[SR71AUTOPILOT INFO]: [LUA]: loading	mode_nav
+[SR71AUTOPILOT INFO]: [LUA]: including	./styles.lua
 [SR71AUTOPILOT INFO]: Module loaded

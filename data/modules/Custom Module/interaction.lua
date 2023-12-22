@@ -163,7 +163,13 @@ function onMouseDown(component, x, y, button, parentX, parentY)
     -- mode_nav ils button
     if (button == MB_LEFT) and x >= mode_nav_pos[1] and x <= (mode_nav_pos[1] + 50) and y >= (mode_nav_pos[2]) and y <=
         (mode_nav_pos[2] + 37) then
+        altitude_mode_ref = get(altitude_mode)
 
+        if altitude_mode_ref ~= 8 then
+            set(altitude_mode, 8)
+        else
+            set(altitude_mode, 12)
+        end
     end
 
     -- trim_pitch button
@@ -221,6 +227,7 @@ function onMouseWheel(component, x, y, button, parentX, parentY, value)
         if airspeed_is_mach_ref == 1 then
             set(airspeed_mach_const, airspeed_mach_adj)
             set(airspeed_dial_kts_mach, airspeed_mach_adj)
+            set(schedule_on, 0)
         end
     end
 
@@ -245,6 +252,38 @@ function onMouseWheel(component, x, y, button, parentX, parentY, value)
         if airspeed_is_mach_ref == 0 then
             set(airspeed_kts_const, airspeed_kts_adj)
             set(airspeed_dial_kts_mach, airspeed_kts_adj)
+            set(schedule_on, 0)
+        end
+    end
+
+    -- hold_nav button
+    if x >= hold_nav_pos[1] and x <= (hold_nav_pos[1] + 50) and y >= (hold_nav_pos[2]) and y <= (hold_nav_pos[2] + 50) then
+        hsi_obs_deg_mag_pilot_ref = get(hsi_obs_deg_mag_pilot)
+        heading_mode_ref = get(heading_mode)
+        heading_is_gpss_ref = get(heading_is_gpss)
+        heading_status_ref = get(heading_status)
+
+        course_adj = math.floor(hsi_obs_deg_mag_pilot_ref + value)
+        if course_adj < 0 then
+            course_adj = 360 + course_adj
+        elseif course_adj > 360 then
+            course_adj = course_adj - 360
+        end
+        sasl.logInfo(course_adj)
+
+        set(hsi_obs_deg_mag_pilot, course_adj)
+    end
+
+    -- hold_hdg button
+    if x >= hold_hdg_pos[1] and x <= (hold_hdg_pos[1] + 50) and y >= (hold_hdg_pos[2]) and y <= (hold_hdg_pos[2] + 50) then
+        heading_dial_deg_mag_pilot_ref = get(heading_dial_deg_mag_pilot)
+        heading_mode_ref = get(heading_mode)
+        heading_is_gpss_ref = get(heading_is_gpss)
+
+        heading_adj = heading_dial_deg_mag_pilot_ref + value
+
+        if heading_mode_ref == 1 and heading_is_gpss_ref == 0 then
+            set(heading_dial_deg_mag_pilot, heading_adj)
         end
     end
 
