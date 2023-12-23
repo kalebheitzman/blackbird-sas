@@ -49,11 +49,13 @@ function onMouseDown(component, x, y, button, parentX, parentY)
 
     end
 
+    -- vertical modes
+    local altitude_mode_ref = get(altitude_mode)
+
     -- hold_mach button
     if (button == MB_LEFT) and x >= hold_mach_pos[1] and x <= (hold_mach_pos[1] + 50) and y >= hold_mach_pos[2] and y <=
-        (hold_mach_pos[2] + 50) then
+        (hold_mach_pos[2] + 50) and altitude_mode_ref ~= 12 then
 
-        altitude_mode_ref = get(altitude_mode)
         airspeed_is_mach_ref = get(airspeed_is_mach)
         schedule_on_ref = get(schedule_on)
 
@@ -61,7 +63,7 @@ function onMouseDown(component, x, y, button, parentX, parentY)
             set(airspeed_is_mach, 1)
         elseif airspeed_is_mach_ref == 1 and altitude_mode_ref == 5 then
             set(airspeed_is_mach, 0)
-            set(altitude_mode, 0)
+            set(altitude_mode, 3)
         else
             set(airspeed_is_mach, 1)
             set(altitude_mode, 5)
@@ -79,7 +81,7 @@ function onMouseDown(component, x, y, button, parentX, parentY)
 
     -- hold_keas button
     if (button == MB_LEFT) and x >= hold_keas_pos[1] and x <= (hold_keas_pos[1] + 50) and y >= hold_keas_pos[2] and y <=
-        (hold_keas_pos[2] + 50) then
+        (hold_keas_pos[2] + 50) and altitude_mode_ref ~= 12 then
 
         altitude_mode_ref = get(altitude_mode)
         airspeed_is_mach_ref = get(airspeed_is_mach)
@@ -88,7 +90,7 @@ function onMouseDown(component, x, y, button, parentX, parentY)
             set(airspeed_is_mach, 0)
         elseif airspeed_is_mach_ref == 0 and altitude_mode_ref == 5 then
             set(airspeed_is_mach, 0)
-            set(altitude_mode, 0)
+            set(altitude_mode, 3)
         else
             set(airspeed_is_mach, 0)
             set(altitude_mode, 5)
@@ -101,31 +103,63 @@ function onMouseDown(component, x, y, button, parentX, parentY)
 
     end
 
+    -- lateral modes
+    local heading_mode_ref = get(heading_mode)
+    local heading_is_gpss_ref = get(heading_is_gpss)
+    get(heading_is_gpss)
+
     -- hold_nav button
     if (button == MB_LEFT) and x >= hold_nav_pos[1] and x <= (hold_nav_pos[1] + 50) and y >= hold_nav_pos[2] and y <=
-        (hold_nav_pos[2] + 50) then
-        heading_mode_ref = get(heading_mode)
-        if heading_mode_ref == 1 then
-            set(heading_mode, 12)
-            set(heading_is_gpss, 0)
-        else
+        (hold_nav_pos[2] + 50) and heading_mode_ref ~= 12 then
+        -- if heading_mode_ref == 1 and heading_is_gpss_ref == 0 then
+        --     set(heading_is_gpss, 1)
+        -- elseif heading_mode_ref == 1 and heading_is_gpss_ref == 1 then
+        --     set(heading_is_gpss, 0)
+        --     set(heading_mode, 0)
+        -- else
+        --     set(heading_mode, 1)
+        --     set(heading_is_gpss, 1)
+        -- end
+
+        if heading_mode_ref == 0 and heading_is_gpss_ref == 1 then
+            set(heading_mode, 1)
+        elseif heading_mode_ref == 0 and heading_is_gpss_ref == 0 then
             set(heading_mode, 1)
             set(heading_is_gpss, 1)
+        elseif heading_mode_ref == 1 and heading_is_gpss_ref == 0 then
+            set(heading_is_gpss, 1)
+        else
+            set(heading_mode, 0)
         end
 
     end
 
     -- hold_hdg button
     if (button == MB_LEFT) and x >= hold_hdg_pos[1] and x <= (hold_hdg_pos[1] + 50) and y >= hold_hdg_pos[2] and y <=
-        (hold_hdg_pos[2] + 50) then
+        (hold_hdg_pos[2] + 50) and heading_mode_ref ~= 12 then
         heading_mode_ref = get(heading_mode)
 
-        if heading_mode_ref == 1 then
-            set(heading_mode, 12)
-        else
+        if heading_mode_ref == 0 and heading_is_gpss_ref == 1 then
             set(heading_is_gpss, 0)
             set(heading_mode, 1)
+        elseif heading_mode_ref == 1 and heading_is_gpss_ref == 1 then
+            set(heading_is_gpss, 0)
+            set(heading_mode, 1)
+        elseif heading_mode_ref == 0 then
+            set(heading_mode, 1)
+        else
+            set(heading_mode, 0)
         end
+
+        -- if heading_mode_ref == 1 and heading_is_gpss_ref == 1 then
+        --     set(heading_is_gpss, 0)
+        --     set(heading_mode, 1)
+        -- elseif heading_mode_ref == 1 and heading_is_gpss_ref == 0 then
+        --     set(heading_mode, 0)
+        -- else
+        --     set(heading_is_gpss, 0)
+        --     set(heading_mode, 1)
+        -- end
     end
 
     -- mode_nav ins button
@@ -282,9 +316,9 @@ function onMouseWheel(component, x, y, button, parentX, parentY, value)
 
         heading_adj = heading_dial_deg_mag_pilot_ref + value
 
-        if heading_mode_ref == 1 and heading_is_gpss_ref == 0 then
-            set(heading_dial_deg_mag_pilot, heading_adj)
-        end
+        -- if heading_mode_ref == 1 and heading_is_gpss_ref == 0 then
+        set(heading_dial_deg_mag_pilot, heading_adj)
+        -- end
     end
 
     -- wheel_pitch up button
@@ -295,10 +329,11 @@ function onMouseWheel(component, x, y, button, parentX, parentY, value)
 
         sync_hold_pitch_deg_ref = get(sync_hold_pitch_deg)
         pitch_tune = 1 / 60
-        pitch_min = -2.5
         pitch_adj = sync_hold_pitch_deg_ref + (pitch_tune * value)
         if pitch_adj < pitch_min then
             pitch_adj = pitch_min
+        elseif pitch_adj > pitch_max then
+            pitch_adj = pitch_max
         end
 
         if altitude_mode_ref == 3 then

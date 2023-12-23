@@ -1,5 +1,7 @@
 include("./styles.lua")
-include("./datarefs")
+include("./commands.lua")
+include("./datarefs.lua")
+include("./params")
 
 -- functions
 include("./interaction.lua")

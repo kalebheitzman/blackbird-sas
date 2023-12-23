@@ -6,8 +6,10 @@
 [SR71AUTOPILOT INFO]: [LUA]: Loading SR71 Autopilot by @Bluegrass...
 [SR71AUTOPILOT INFO]: [LUA]: loading	autopilot
 [SR71AUTOPILOT INFO]: [LUA]: including	./styles.lua
-[SR71AUTOPILOT INFO]: [LUA]: including	./datarefs
+[SR71AUTOPILOT INFO]: [LUA]: including	./commands.lua
+[SR71AUTOPILOT INFO]: [LUA]: including	./datarefs.lua
 [SR71AUTOPILOT INFO]: [LUA]: including	./styles.lua
+[SR71AUTOPILOT INFO]: [LUA]: including	./params
 [SR71AUTOPILOT INFO]: [LUA]: including	./interaction.lua
 [SR71AUTOPILOT INFO]: [LUA]: including	./styles.lua
 [SR71AUTOPILOT INFO]: [LUA]: including	./schedule.lua
