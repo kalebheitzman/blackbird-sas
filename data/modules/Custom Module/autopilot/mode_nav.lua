@@ -9,16 +9,20 @@ function draw()
     altitude_mode_ref = get(altitude_mode)
 
     -- ins
-    sasl.gl.drawRectangle(0, 74, 60, 31, button_color)
     ins_color = white_color
-    if heading_is_gpss_ref == 1 then
+    if heading_mode_ref == 12 then
+        ins_color = inactive_color
+    elseif heading_mode_ref == 1 and heading_is_gpss_ref == 1 then
         ins_color = green_color
     end
+    sasl.gl.drawRectangle(0, 74, 60, 31, button_color)
     sasl.gl.drawText(roboto, 30, 85, "INS", font_size, true, false, TEXT_ALIGN_CENTER, ins_color)
 
     -- tacan
     tacan_color = white_color
-    if heading_mode_ref == 2 and heading_is_gpss_ref == 0 then
+    if heading_mode_ref == 12 then
+        tacan_color = inactive_color
+    elseif heading_mode_ref == 2 and heading_is_gpss_ref == 0 then
         tacan_color = green_color
     end
     sasl.gl.drawRectangle(0, 37, 60, 31, button_color)
@@ -26,7 +30,9 @@ function draw()
 
     -- ils
     ils_color = white_color
-    if altitude_mode_ref == 8 then
+    if altitude_mode_ref == 12 or heading_mode_ref == 12 then
+        ils_color = inactive_color
+    elseif altitude_mode_ref == 8 then
         ils_color = green_color
     end
     sasl.gl.drawRectangle(0, 0, 60, 31, button_color)

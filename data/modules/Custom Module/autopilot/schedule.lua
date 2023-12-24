@@ -48,7 +48,10 @@ function airspeed_schedule()
         bleed_mach = bleed_table[schedule_kts]
 
         -- turn the schedule on when needed
-        if mach_ref > bleed_mach and airspeed_kts_ref > schedule_kts and schedule_on_ref == 0 then
+
+        if airspeed_is_mach_ref == 1 and bleed_mach > airspeed_mach_const_ref then
+            set(schedule_on, 0)
+        elseif mach_ref > bleed_mach and airspeed_kts_ref > schedule_kts and schedule_on_ref == 0 then
             set(schedule_on, 1)
         end
 

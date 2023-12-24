@@ -5,8 +5,9 @@ function csc_pushbutton_handler(phase)
     override_joystick_ref = get(override_joystick)
 
     -- pitch and roll state
-    altitude_mode_ref = get(altitude_mode)
-    heading_mode_ref = get(heading_mode)
+    altitude_mode_state_ref = get(altitude_mode_state)
+    heading_mode_state_ref = get(heading_mode_state)
+    heading_is_gpss_state_ref = get(heading_is_gpss_state)
     pitch_electric_deg_pilot_ref = get(pitch_electric_deg_pilot)
     roll_electric_deg_pilot_ref = get(roll_electric_deg_pilot)
 
@@ -25,11 +26,11 @@ function csc_pushbutton_handler(phase)
         set(sync_hold_roll_deg, roll_electric_deg_pilot_ref)
 
         -- reengage pitch and roll mode
-        set(altitude_mode, 3)
-        set(heading_mode, 0)
+        set(altitude_mode, altitude_mode_state_ref)
+        set(heading_mode, heading_mode_state_ref)
+        set(heading_is_gpss, heading_is_gpss_state_ref)
 
     end
-    sasl.logInfo("csc_pushbutton", phase, pitch_electric_deg_pilot_ref, roll_electric_deg_pilot)
 
     return 1
 end
