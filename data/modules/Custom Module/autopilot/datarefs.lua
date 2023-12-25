@@ -23,6 +23,8 @@ airspeed_mach = globalProperty("sim/cockpit2/gauges/indicators/mach_pilot")
 airspeed_is_mach = globalProperty("sim/cockpit2/autopilot/airspeed_is_mach")
 airspeed_dial_kts = globalProperty("sim/cockpit2/autopilot/airspeed_dial_kts")
 airspeed_dial_kts_mach = globalProperty("sim/cockpit2/autopilot/airspeed_dial_kts_mach")
+true_airspeed_kts_pilot = globalProperty("sim/cockpit2/gauges/indicators/true_airspeed_kts_pilot")
+ground_speed_kt = globalProperty("sim/cockpit2/gauges/indicators/ground_speed_kt")
 sync_hold_pitch_deg = globalProperty("sim/cockpit2/autopilot/sync_hold_pitch_deg")
 pitch_electric_deg_pilot = globalProperty("sim/cockpit2/gauges/indicators/pitch_electric_deg_pilot")
 
@@ -65,3 +67,7 @@ altitude_mode_state = createProperty("bluegrass/sr71/sas/altitude_mode_state")
 set(heading_mode_state, get(heading_mode))
 set(heading_is_gpss_state, get(heading_is_gpss))
 set(altitude_mode_state, get(altitude_mode))
+
+-- other
+wind_heading_deg_mag = globalProperty("sim/cockpit2/gauges/indicators/wind_heading_deg_mag")
+wind_speed_kts = globalProperty("sim/cockpit2/gauges/indicators/wind_speed_kts")
