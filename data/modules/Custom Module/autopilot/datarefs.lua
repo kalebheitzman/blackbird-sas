@@ -2,7 +2,7 @@ include("./styles.lua")
 
 -- ap
 servos_on = globalProperty("sim/cockpit2/autopilot/servos_on")
-fd_mode = globalProperty("sim/cockpit2/autopilot/flight_director_mode")
+flight_director_mode = globalProperty("sim/cockpit2/autopilot/flight_director_mode")
 override_joystick = globalProperty("sim/operation/override/override_joystick")
 override_autopilot = globalProperty("sim/operation/override/override_autopilot")
 
@@ -48,9 +48,10 @@ roll_electric_deg_pilot = globalProperty("sim/cockpit2/gauges/indicators/roll_el
 bank_angle_mode = globalProperty("sim/cockpit2/autopilot/bank_angle_mode")
 bank_angles_values = globalProperty("sim/cockpit2/autopilot/bank_angles_values")
 override_flightdir_roll = globalProperty("sim/operation/override/override_flightdir_roll")
-flight_director_roll_deg = globalProperty("sim/cockpit2/autopilot/flight_director_roll_deg")
+flight_director_roll = globalProperty("sim/cockpit/autopilot/flight_director_roll")
 gps_hdef_dots_pilot = globalProperty("sim/cockpit2/radios/indicators/gps_hdef_dots_pilot")
 gps_dme_distance_nm = globalProperty("sim/cockpit2/radios/indicators/gps_dme_distance_nm")
+gps_xtk = globalProperty("sim/cockpit2/radios/indicators/gps_xtk")
 
 -- schedule
 schedule_on = createProperty("bluegrass/sr71/sas/schedule_on")

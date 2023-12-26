@@ -2,7 +2,7 @@ include("../styles.lua")
 
 function draw()
 
-    sasl.gl.drawRectangle(0, 0, 83, 30, button_color)
+    sasl.gl.drawRectangle(0, 0, 83, 30, button)
 
     radio_mode_ref = get(radio_mode)
     if radio_mode_ref == 0 then
@@ -21,9 +21,9 @@ function draw()
             channel = tac_channel_ref
         end
 
-        color = green_color
+        color = green
         if channel == "--" then
-            color = white_color
+            color = white
         end
 
         sasl.gl.drawText(roboto, 65, 10, channel, 12, true, false, TEXT_ALIGN_RIGHT, color)
@@ -34,13 +34,13 @@ function draw()
         nav1_frequency_khz_ref = get(nav1_frequency_khz)
 
         sasl.gl.drawText(roboto, 71, 10, nav1_frequency_Mhz_ref .. "." .. nav1_frequency_khz_ref, 12, true, false,
-            TEXT_ALIGN_RIGHT, green_color)
+            TEXT_ALIGN_RIGHT, green)
     elseif radio_mode_ref == 2 then
         com1_frequency_Mhz_ref = get(com1_frequency_Mhz)
         com1_frequency_khz_ref = get(com1_frequency_khz)
 
         sasl.gl.drawText(roboto, 71, 10, com1_frequency_Mhz_ref .. "." .. com1_frequency_khz_ref, 12, true, false,
-            TEXT_ALIGN_RIGHT, green_color)
+            TEXT_ALIGN_RIGHT, green)
 
     end
 

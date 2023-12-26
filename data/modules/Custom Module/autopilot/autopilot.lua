@@ -9,9 +9,6 @@ include("./functions.lua")
 include("./interaction.lua")
 include("./schedule.lua")
 
-include("./calc-angle.lua")
-include("./calc-turntime.lua")
-
 -- positions
 ap_pos = {10, 65, 50, 50}
 stab_pitch_pos = {65, 65, 50, 50}
@@ -57,7 +54,7 @@ function draw()
     drawAll(ap_components)
 
     -- sr71 airspeed schedule for mach and keas hold
-    airspeed_schedule()
+    -- airspeed_schedule()
 
     -- ap csc button
     -- renable stick when ap is off
@@ -77,7 +74,7 @@ function draw()
 
     -- set(override_flightdir_roll, 0)
     -- set(override_autopilot, 1)
-    -- set(flight_director_roll_deg, 60)
+    -- set(flight_director_roll, 60)
     set(bank_angles_values, 1, 1)
     set(bank_angles_values, 5, 2)
     set(bank_angles_values, 30, 5)
@@ -117,36 +114,5 @@ function draw()
     -- id = sasl.getGPSDestination()
 
     -- sasl.logInfo(id, entry, lat1, lon1, lat2, lon2, lat3, lon3)
-
-    true_airspeed_kts_pilot_ref = get(true_airspeed_kts_pilot)
-    -- ground_speed_kt_ref = get(ground_speed_kt)
-    count = sasl.countFMSEntries()
-    idx = sasl.getDestinationFMSEntry()
-
-    type1, name1, id1, alt1, lat1, lon1 = sasl.getFMSEntryInfo(idx - 1)
-    type2, name2, id2, alt2, lat2, lon2 = sasl.getFMSEntryInfo(idx)
-    type3, name3, id3, alt3, lat3, lon3 = sasl.getFMSEntryInfo(idx + 1)
-
-    sasl.logInfo(idx, name1, name2, name3)
-    -- local angle = -(90 - calculateAngle(lat1, lon1, lat2, lon2, lat3, lon3))
-    -- local turntime = calculateTurnTime(true_airspeed_kts_pilot_ref, angle)
-    -- local turnDistance = calculateTurnDistance(true_airspeed_kts_pilot_ref, angle, ground_speed_kt_ref)
-
-    -- sasl.logInfo(true_airspeed_kts_pilot_ref, angle, ground_speed_kt_ref, turntime, turnDistance)
-
-    bankAngle = 30
-    windDirection = get(wind_heading_deg_mag)
-    windSpeed = get(wind_speed_kts)
-
-    results = calculateTurnParameters({lat1, lon1}, {lat2, lon2}, {lat3, lon3}, true_airspeed_kts_pilot_ref, bankAngle,
-        windDirection, windSpeed)
-
-    sasl.logInfo(lat1, lon1, lat2, lon2, lat3, lon3, true_airspeed_kts_pilot_ref, bankAngle)
-    for key, value in pairs(results) do
-        sasl.logInfo(key .. ": " .. value)
-    end
-
-    -- sasl.logInfo(distance)
-    sasl.logInfo("-----")
 
 end

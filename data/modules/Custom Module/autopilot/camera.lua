@@ -28,7 +28,7 @@ cameraImageID = sasl.gl.createTexture(355, 240)
 cameraTarget = sasl.gl.createRenderTarget(335, 240, 1, RENDER_TARGET_CDS)
 
 function draw()
-    sasl.gl.drawRectangle(10, 10, 335, 240, black_color)
+    sasl.gl.drawRectangle(10, 10, 335, 240, black)
 
     -- cameraParams = sasl.gl.getTargetTextureData(cameraImageID, 0, 0, 355, 240)
 
@@ -41,6 +41,6 @@ function draw()
     -- openglTexId = sasl.gl.exportTexture(testImage)
     -- sasl.gl.imageFromTexture("sr-radar.jpg", testImage)
 
-    -- sasl.gl.drawTexture(testImage, 0, 0, 335, 240, black_color)
+    -- sasl.gl.drawTexture(testImage, 0, 0, 335, 240, black)
 
 end

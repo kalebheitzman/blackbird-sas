@@ -5,48 +5,46 @@ function onMouseDown(component, x, y, button, parentX, parentY)
     -- ap button
     if (button == MB_LEFT) and x >= ap_pos[1] and x <= (ap_pos[1] + 50) and y >= ap_pos[2] and y <= (ap_pos[2] + 50) then
 
-        fd_mode_ref = get(fd_mode)
-        if fd_mode_ref == 2 then
-            set(fd_mode, 0)
+        flight_director_mode_ref = get(flight_director_mode)
+        if flight_director_mode_ref == 2 then
+            set(flight_director_mode, 0)
         else
-            set(fd_mode, 2)
+            set(flight_director_mode, 2)
         end
     end
 
     -- stab_pitch button
-    if (button == MB_LEFT) and x >= stab_pitch_pos[1] and x <= (stab_pitch_pos[1] + 50) and y >= stab_pitch_pos[2] and y <=
-        (stab_pitch_pos[2] + 50) then
-        pitch_stab_on_ref = get(pitch_stab_on)
-        if pitch_stab_on_ref == 1 then
-            set(pitch_stab_on, 0)
-        else
-            set(pitch_stab_on, 1)
-        end
-    end
+    -- if (button == MB_LEFT) and x >= stab_pitch_pos[1] and x <= (stab_pitch_pos[1] + 50) and y >= stab_pitch_pos[2] and y <=
+    --     (stab_pitch_pos[2] + 50) then
+    --     pitch_stab_on_ref = get(pitch_stab_on)
+    --     if pitch_stab_on_ref == 1 then
+    --         set(pitch_stab_on, 0)
+    --     else
+    --         set(pitch_stab_on, 1)
+    --     end
+    -- end
 
     -- stab_roll button
-    if (button == MB_LEFT) and x >= stab_roll_pos[1] and x <= (stab_roll_pos[1] + 50) and y >= stab_roll_pos[2] and y <=
-        (stab_roll_pos[2] + 50) then
-        roll_stab_on_ref = get(roll_stab_on)
-        if roll_stab_on_ref == 1 then
-            set(roll_stab_on, 0)
-        else
-            set(roll_stab_on, 1)
-        end
-
-    end
+    -- if (button == MB_LEFT) and x >= stab_roll_pos[1] and x <= (stab_roll_pos[1] + 50) and y >= stab_roll_pos[2] and y <=
+    --     (stab_roll_pos[2] + 50) then
+    --     roll_stab_on_ref = get(roll_stab_on)
+    --     if roll_stab_on_ref == 1 then
+    --         set(roll_stab_on, 0)
+    --     else
+    --         set(roll_stab_on, 1)
+    --     end
+    -- end
 
     -- stab_yaw button
-    if (button == MB_LEFT) and x >= stab_yaw_pos[1] and x <= (stab_yaw_pos[1] + 50) and y >= stab_yaw_pos[2] and y <=
-        (stab_yaw_pos[2] + 50) then
-        yaw_stab_on_ref = get(yaw_stab_on)
-        if yaw_stab_on_ref == 1 then
-            set(yaw_stab_on, 0)
-        else
-            set(yaw_stab_on, 1)
-        end
-
-    end
+    -- if (button == MB_LEFT) and x >= stab_yaw_pos[1] and x <= (stab_yaw_pos[1] + 50) and y >= stab_yaw_pos[2] and y <=
+    --     (stab_yaw_pos[2] + 50) then
+    --     yaw_stab_on_ref = get(yaw_stab_on)
+    --     if yaw_stab_on_ref == 1 then
+    --         set(yaw_stab_on, 0)
+    --     else
+    --         set(yaw_stab_on, 1)
+    --     end
+    -- end
 
     -- vertical modes
     local altitude_mode_ref = get(altitude_mode)
@@ -372,7 +370,7 @@ function onMouseWheel(component, x, y, button, parentX, parentY, value)
             -- set(override_autopilot, 1)
             -- set(override_flightdir_roll, 0)
             set(sync_hold_roll_deg, roll_adj)
-            -- set(flight_director_roll_deg, roll_adj)
+            -- set(flight_director_roll, roll_adj)
         else
             set(override_autopilot, 0)
             set(override_flightdir_roll, 0)

@@ -6,9 +6,23 @@ sasl.options.setAircraftPanelRendering(false)
 sasl.options.set3DRendering(false)
 sasl.options.setInteractivity(true)
 
+local calloutWindow = contextWindow {
+    name = "Callouts",
+    position = {10, 10, 355, 125},
+    noResize = true,
+    visible = true,
+    vrAuto = true,
+    noDecore = true,
+    noMove = true,
+    noBackground = true,
+    components = {callouts {
+        position = {10, 10, 355, 125}
+    }}
+}
+
 local apWindow = contextWindow {
     name = "SAS",
-    position = {10, 10, 355, 125},
+    position = {10, 50, 355, 125},
     noResize = true,
     visible = true,
     vrAuto = true,
@@ -22,7 +36,7 @@ local apWindow = contextWindow {
 
 local radioWindow = contextWindow {
     name = "Radio",
-    position = {10, 125, 290, 120},
+    position = {10, 165, 290, 120},
     noResize = true,
     visible = true,
     vrAuto = true,
